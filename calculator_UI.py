@@ -3,6 +3,8 @@ from tkinter import *
 root = Tk()
 root.title("Calculator")
 
+global operator
+global first
 
 def button_click(number):
     current = entry.get()
@@ -16,20 +18,56 @@ def clear():
 
 
 def button_add():
+    global operator
+    operator = "addition"
     number = entry.get()
     global first
     first = int(number)
     entry.delete(0, END)
 
 def button_equal():
-    number = int(entry.get())
-    total = first + number
+    global operator
+    result = 0
+    if operator == "addition":
+        number = int(entry.get())
+        result = first + number
+    elif operator == "minus":
+        number = int(entry.get())
+        result = first - number
+    elif operator == "division":
+        number = int(entry.get())
+        result = first / number
+    elif operator == "multiplication":
+        number = int(entry.get())
+        result = first * number
+    # You can add more operators
     entry.delete(0, END)
-    entry.insert(0, str(total))
+    entry.insert(0, str(result))
 
 def button_minus():
+    global operator
+    global first
+    operator = "minus"
     number = int(entry.get())
-    result = first
+    first = number
+    entry.delete(0, END)
+
+def button_multi():
+    global operator
+    global first
+    operator = "multiplication"
+    number = int(entry.get())
+    first = number
+    entry.delete(0, END)
+
+
+def button_division():
+    global operator
+    global first
+    operator = "division"
+    number = int(entry.get())
+    first = number
+    entry.delete(0, END)
 
 entry = Entry(root, width=60, borderwidth=10)
 entry.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
@@ -48,8 +86,8 @@ button_9 = Button(root, text="9", padx=40, pady=20, command=lambda: button_click
 button_0 = Button(root, text="0", padx=40, pady=20, command=lambda: button_click(0))
 button_addition = Button(root, text="+", padx=40, pady=20, command=button_add)
 button_minus = Button(root, text="-", padx=40, pady=20, command=button_minus)
-button_multi = Button(root, text="*", padx=40, pady=20, command=button_add)
-button_division = Button(root, text="/", padx=40, pady=20, command=button_add)
+button_multi = Button(root, text="*", padx=40, pady=20, command=button_multi)
+button_division = Button(root, text="/", padx=40, pady=20, command=button_division)
 button_equal = Button(root, text="=", padx=39, pady=20, command=button_equal)
 button_clear = Button(root, text="Clear", padx=29, pady=20, command=clear)
 

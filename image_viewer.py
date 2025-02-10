@@ -14,6 +14,9 @@ def next(image_number):
     button_next = Button(root, text=">>", command=lambda: next(image_number + 1))
     button_previous = Button(root, text="<<", command=lambda: previous(image_number - 1))
 
+    status = Label(root, text="Image " + str(image_number) + " of " + str(len(images)), anchor=E)
+    status.grid(row=2, column=0, columnspan=3, sticky=W + E)
+
     if image_number == 5:
         button_next = Button(root, text=">>", state=DISABLED)
 
@@ -31,6 +34,9 @@ def previous(image_number):
     my_label = Label(image=images[image_number - 1])
     button_next = Button(root, text=">>", command=lambda: next(image_number + 1))
     button_previous = Button(root, text="<<", command=lambda: previous(image_number - 1))
+
+    status = Label(root, text="Image " + str(image_number) + " of " + str(len(images)), anchor=E)
+    status.grid(row=2, column=0, columnspan=3, sticky=W + E)
 
     if image_number == 1:
         button_previous = Button(root, text="<<", state=DISABLED)
@@ -50,6 +56,8 @@ my_image4 = ImageTk.PhotoImage(Image.open("Cat_Photos/cat4.png"))
 my_image5 = ImageTk.PhotoImage(Image.open("Cat_Photos/cat5.png"))
 images = [my_image1, my_image2, my_image3, my_image4, my_image5]
 
+status = Label(root, text="Image 1 of "+ str(len(images)), anchor=E)
+status.grid(row=2, column=0, columnspan=3, sticky=W+E)
 
 my_label = Label(image=images[0])
 my_label.grid(row=0, column=0, columnspan=3)
